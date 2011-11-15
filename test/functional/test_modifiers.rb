@@ -147,6 +147,7 @@ class ModifierTest < Test::Unit::TestCase
       setup do
         @page  = @page_class.create(:title => 'Home')
         @page2 = @page_class.create(:title => 'Home')
+        @page3 = @page_class.create(:title => 'Profile')
       end
 
       should "work with criteria and modifier hashes" do
@@ -156,7 +157,10 @@ class ModifierTest < Test::Unit::TestCase
         @page.tags.should == %w(foo)
 
         @page2.reload
-        @page.tags.should == %w(foo)
+        @page2.tags.should == %w(foo)
+
+        @page3.reload
+        @page3.tags.should be_empty
       end
 
       should "work with ids and modifier hash" do
